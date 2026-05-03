@@ -148,7 +148,7 @@ export default function BlogPost() {
               <div className="w-12 h-[1px] bg-gray-200 dark:bg-neutral-800 my-2 mx-auto" />
 
               <a
-                href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(currentUrl)}&media=${encodeURIComponent(imageUrl)}&description=${encodeURIComponent(data.pinterestDescription || data.title)}`}
+                href="https://in.pinterest.com/jkstyleaura/"
                 target="_blank"
                 rel="noreferrer"
                 className="w-12 h-12 rounded-full bg-[#E60023] text-white flex items-center justify-center shadow-lg hover:bg-red-700 transition-colors"
@@ -156,7 +156,7 @@ export default function BlogPost() {
                 <SiPinterest size={20} />
               </a>
               <a
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(data.title)}&url=${encodeURIComponent(currentUrl)}`}
+                href="https://twitter.com/jkstyleaura"
                 target="_blank"
                 rel="noreferrer"
                 className="w-12 h-12 rounded-full bg-[#1DA1F2] text-white flex items-center justify-center shadow-lg hover:bg-sky-600 transition-colors"
@@ -164,7 +164,7 @@ export default function BlogPost() {
                 <FiTwitter size={20} />
               </a>
               <a
-                href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
+                href="https://www.facebook.com/jkstyleaura"
                 target="_blank"
                 rel="noreferrer"
                 className="w-12 h-12 rounded-full bg-[#4267B2] text-white flex items-center justify-center shadow-lg hover:bg-blue-700 transition-colors"
@@ -193,12 +193,28 @@ export default function BlogPost() {
               </button>
               <div className="flex items-center gap-2 ml-auto">
                 <a
-                  href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(currentUrl)}&media=${encodeURIComponent(imageUrl)}`}
+                  href="https://in.pinterest.com/jkstyleaura/"
                   target="_blank"
                   rel="noreferrer"
                   className="p-2 text-[#E60023] bg-red-50 rounded-full"
                 >
                   <SiPinterest size={18} />
+                </a>
+                <a
+                  href="https://twitter.com/jkstyleaura"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2 text-[#1DA1F2] bg-blue-50 rounded-full"
+                >
+                  <FiTwitter size={18} />
+                </a>
+                <a
+                  href="https://www.facebook.com/jkstyleaura"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="p-2 text-[#4267B2] bg-blue-50 rounded-full"
+                >
+                  <FiFacebook size={18} />
                 </a>
                 <button
                   onClick={copyLink}

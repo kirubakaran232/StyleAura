@@ -6,7 +6,8 @@ import ScrollToTop from './components/common/ScrollToTop';
 import Home from './pages/Home';
 import BlogPost from './pages/BlogPost';
 import ProductPage from './pages/ProductPage';
-import CategoryPage from './pages/CategoryPage';
+import ShopPage from './pages/ShopPage';
+import OutfitsPage from './pages/OutfitsPage';
 import SearchResults from './pages/SearchResults';
 import Bookmarks from './pages/Bookmarks';
 import {
@@ -50,7 +51,8 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/blog/:slug" element={<BlogPost />} />
                   <Route path="/product/:slug" element={<ProductPage />} />
-                  <Route path="/category/:category" element={<CategoryPage />} />
+                  <Route path="/shop" element={<ShopPage />} />
+                  <Route path="/outfits" element={<OutfitsPage />} />
                   <Route path="/search" element={<SearchResults />} />
                   <Route path="/bookmarks" element={<Bookmarks />} />
                   <Route path="/about" element={<About />} />

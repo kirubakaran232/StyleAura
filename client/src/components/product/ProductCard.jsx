@@ -6,7 +6,7 @@ import { trackClick } from '../../services/api';
 import { useBookmarks } from '../../context/BookmarkContext';
 
 function getImageUrl(img) {
-  if (!img) return 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80';
+  if (!img) return null;
   if (img.startsWith('http')) return img;
   const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
   return baseUrl + img;
@@ -18,7 +18,7 @@ export default function ProductCard({ product, index = 0, innerRef }) {
 
   const imageUrl = product.images?.[0]?.url
     ? getImageUrl(product.images[0].url)
-    : 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80';
+    : '/placeholder.jpg';
 
   const handleAffiliateClick = async (e) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ export default function ProductCard({ product, index = 0, innerRef }) {
             alt={product.name}
             loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            onError={e => { e.target.src = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80'; }}
+            onError={e => { e.target.src = '/placeholder.jpg'; }}
           />
         </div>
 
@@ -107,7 +107,7 @@ export default function ProductCard({ product, index = 0, innerRef }) {
             className="btn-amazon w-full text-sm py-2.5 disabled:opacity-70"
           >
             <FiShoppingCart size={14} />
-            {clicking ? 'Opening...' : 'Check Current Price'}
+            {clicking ? 'Opening...' : 'View Product'}
           </motion.button>
         </div>
       </div>

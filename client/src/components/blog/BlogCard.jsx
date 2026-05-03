@@ -7,7 +7,7 @@ import { useBookmarks } from '../../context/BookmarkContext';
 import { likeBlog } from '../../services/api';
 
 function getImageUrl(img) {
-  if (!img) return 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80';
+  if (!img) return '/placeholder.jpg';
   if (img.startsWith('http')) return img;
   const baseUrl = import.meta.env.VITE_API_BASE_URL || '';
   return baseUrl + img;
@@ -67,7 +67,7 @@ export default function BlogCard({ blog, index = 0, innerRef }) {
               alt={blog.title}
               loading="lazy"
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              onError={e => { e.target.src = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80'; }}
+              onError={e => { e.target.src = '/placeholder.jpg'; }}
             />
             {/* Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -101,7 +101,7 @@ export default function BlogCard({ blog, index = 0, innerRef }) {
           </div>
 
           {/* Content */}
-          <div className="p-4">
+          <div className="p-4 flex flex-col flex-1">
             <h3 className="font-display font-bold text-gray-900 dark:text-white text-base leading-snug line-clamp-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors mb-2">
               {blog.title}
             </h3>
@@ -110,7 +110,7 @@ export default function BlogCard({ blog, index = 0, innerRef }) {
             )}
 
             {/* Footer stats */}
-            <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
+            <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500 mb-3">
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleLike}
@@ -126,6 +126,12 @@ export default function BlogCard({ blog, index = 0, innerRef }) {
               <time className="text-xs">
                 {new Date(blog.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
               </time>
+            </div>
+
+            <div className="mt-auto pt-2">
+              <span className="btn-outline w-full text-sm py-2.5 flex items-center justify-center">
+                View Outfit
+              </span>
             </div>
           </div>
         </div>

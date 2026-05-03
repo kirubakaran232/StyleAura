@@ -9,8 +9,8 @@ import SearchBar from './SearchBar';
 const NAV_LINKS = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
-  { label: "Fashion", to: "/category/fashion" },
-  { label: "Beauty", to: "/category/beauty" },
+  { label: "Outfits", to: "/outfits" },
+  { label: "Shop", to: "/shop" },
   { label: "Contact", to: "/contact" },
 ];
 

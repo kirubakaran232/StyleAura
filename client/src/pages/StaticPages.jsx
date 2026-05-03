@@ -151,18 +151,17 @@ export function Contact() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    setResult("Sending....");
     const formData = new FormData(event.target);
-    formData.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY);
+    formData.append("access_key", "a01001dd-4fe3-406a-aa33-c1fdd488a47a");
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      body: formData,
+      body: formData
     });
 
     const data = await response.json();
     if (data.success) {
-      setResult("Form Submitted Successfully");
+      setResult("Success!");
       event.target.reset();
     } else {
       setResult("Error");
@@ -321,10 +320,10 @@ export function Contact() {
             </div>
             <div className="flex items-center gap-4">
               <button type="submit" className="btn-primary w-full sm:w-auto">
-                Send Message <FiArrowRight size={16} />
+                Submit <FiArrowRight size={16} />
               </button>
               {result && (
-                <span className={`text-sm font-semibold ${result === 'Form Submitted Successfully' ? 'text-primary-600' : 'text-red-500'}`}>
+                <span className={`text-sm font-semibold ${result === 'Success!' ? 'text-primary-600' : 'text-red-500'}`}>
                   {result}
                 </span>
               )}
