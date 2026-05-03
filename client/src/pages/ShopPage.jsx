@@ -70,7 +70,7 @@ export default function ShopPage() {
               transition={{ delay: 0.15 }}
               className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-card-hover bg-gray-900"
             >
-              <img src="/beauty.png" alt="Shop Collection" className="absolute inset-0 w-full h-full object-cover" />
+              <img src="/shop.png" alt="Shop Collection" className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
             </motion.div>
           </div>

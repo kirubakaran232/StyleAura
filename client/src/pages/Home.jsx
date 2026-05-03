@@ -36,7 +36,7 @@ const STYLE_BOARDS = [
     label: "Party Ready",
     title: "A sharper evening look",
     image:
-      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=1000&q=80",
+      "/home2.png",
     notes: [
       "Statement dress or co-ord",
       "Defined eye makeup",
@@ -49,7 +49,7 @@ const STYLE_BOARDS = [
     label: "Skin First",
     title: "Simple skincare routine",
     image:
-      "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=1000&q=80",
+      "/home3.png",
     notes: ["Gentle cleanser", "Lightweight moisturizer", "Daily sunscreen"],
     to: "/category/beauty",
   },
