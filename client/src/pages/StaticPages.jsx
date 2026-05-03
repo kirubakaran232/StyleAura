@@ -96,7 +96,7 @@ export function About() {
                   alt="StyleAura fashion and beauty editorial"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-900/65 via-primary-700/20 to-transparent" />
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-primary-900/65 via-primary-700/20 to-transparent" /> */}
               </div>
               <div className="absolute -bottom-6 left-4 right-4 sm:left-8 sm:right-8 bg-white/95 dark:bg-neutral-900/95 backdrop-blur border border-gray-100 dark:border-neutral-800 rounded-2xl shadow-card p-5">
                 <div className="grid grid-cols-3 gap-3 text-center">
