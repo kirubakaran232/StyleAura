@@ -118,17 +118,17 @@ export default function ProductPage() {
             <ProsCons pros={data.pros} cons={data.cons} />
 
             {/* CTA */}
-            {/* <div className="mt-8 p-6 bg-gray-50 dark:bg-neutral-900 rounded-3xl border border-gray-100 dark:border-neutral-800">
-              <p className="text-sm text-gray-500 mb-4 text-center">
+            <div className="mt-8 p-6 bg-gray-50 dark:bg-neutral-900 rounded-3xl border border-gray-100 dark:border-neutral-800">
+              {/* <p className="text-sm text-gray-500 mb-4 text-center">
                 We may earn a commission if you purchase through this link, at no extra cost to you.
-              </p>
+              </p> */}
               <AffiliateButton 
                 productId={data._id} 
                 affiliateLink={data.affiliateLink} 
                 size="lg" 
                 label="Check Current Price" 
               />
-            </div> */}
+            </div>
           </motion.div>
         </div>
       </div>
