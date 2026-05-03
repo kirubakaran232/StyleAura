@@ -86,10 +86,10 @@ export default function Navbar() {
               >
                 <SiInstagram size={17} />
               </a>
-              <Link to="/admin/login" className="btn-outline text-sm py-2 px-3 hidden xl:flex">
+              {/* <Link to="/admin/login" className="btn-outline text-sm py-2 px-3 hidden xl:flex">
                 <FiLock size={15} /> Admin
-              </Link>
-              <ThemeToggle />
+              </Link> */}
+              {/* <ThemeToggle /> */}
               <button
                 className="lg:hidden btn-ghost p-2.5 rounded-xl"
                 onClick={() => setMobileOpen(p => !p)}

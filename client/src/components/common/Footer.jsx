@@ -7,7 +7,6 @@ const QUICK_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
-  { label: 'Sitemap', to: '/sitemap' },
   { label: 'Admin Login', to: '/admin/login' },
 ];
 const LEGAL_LINKS = [
@@ -61,7 +60,7 @@ export default function Footer() {
               {CATEGORIES.map(cat => (
                 <li key={cat}>
                   <Link
-                    to={`/category/${cat.toLowerCase()}`}
+                    to={`/outfits`}
                     onClick={scrollToTop}
                     className="text-gray-500 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 text-sm transition-colors"
                   >
@@ -106,9 +105,9 @@ export default function Footer() {
       <div className="border-t border-gray-100 dark:border-neutral-800 py-6">
         <div className="container-custom flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-gray-400 dark:text-gray-600">
           <p>Copyright {new Date().getFullYear()} StyleAura. All rights reserved.</p>
-          <p className="flex items-center gap-1.5">
+          {/* <p className="flex items-center gap-1.5">
             Made with <FiHeart size={14} className="text-primary-500" /> for style lovers
-          </p>
+          </p> */}
         </div>
       </div>
     </footer>

@@ -65,25 +65,33 @@ export function About() {
     <>
       <Helmet>
         <title>About StyleAura - Clothing & Cosmetics Inspiration</title>
-        <meta name="description" content="Learn about StyleAura, a clothing and cosmetics blog built to make style easier, affordable, and confidence-boosting." />
+        <meta
+          name="description"
+          content="Learn about StyleAura, a clothing and cosmetics blog built to make style easier, affordable, and confidence-boosting."
+        />
       </Helmet>
 
       <section className="relative overflow-hidden bg-white dark:bg-neutral-950">
         <div className="container-custom py-16 md:py-24">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-14 items-center">
             <div className="text-center lg:text-left">
-              <p className="text-primary-600 dark:text-primary-400 text-sm font-semibold mb-3">About StyleAura</p>
+              <p className="text-primary-600 dark:text-primary-400 text-sm font-semibold mb-3">
+                About StyleAura
+              </p>
               <h1 className="font-display text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight mb-6">
                 Style made practical, beautiful, and confidence-first.
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-                StyleAura helps people discover outfit ideas, skincare basics, cosmetics guides, and product picks that actually fit real lifestyles and budgets. Everything is designed to feel easy to follow and useful in everyday life.
+                StyleAura helps people discover outfit ideas, skincare basics,
+                cosmetics guides, and product picks that actually fit real
+                lifestyles and budgets. Everything is designed to feel easy to
+                follow and useful in everyday life.
               </p>
               <div className="flex flex-wrap justify-center lg:justify-start gap-3">
-                <Link to="/category/fashion" className="btn-primary">
+                <Link to="/outfits" className="btn-primary">
                   Explore Fashion <FiArrowRight size={16} />
                 </Link>
-                <Link to="/category/beauty" className="btn-outline">
+                <Link to="/outfits" className="btn-outline">
                   Explore Beauty
                 </Link>
               </div>
@@ -101,15 +109,21 @@ export function About() {
               <div className="absolute -bottom-6 left-4 right-4 sm:left-8 sm:right-8 bg-white/95 dark:bg-neutral-900/95 backdrop-blur border border-gray-100 dark:border-neutral-800 rounded-2xl shadow-card p-5">
                 <div className="grid grid-cols-3 gap-3 text-center">
                   <div>
-                    <p className="font-display text-2xl font-bold text-gray-900 dark:text-white">2</p>
+                    <p className="font-display text-2xl font-bold text-gray-900 dark:text-white">
+                      2
+                    </p>
                     <p className="text-xs text-gray-500">Core niches</p>
                   </div>
                   <div>
-                    <p className="font-display text-2xl font-bold text-gray-900 dark:text-white">Weekly</p>
+                    <p className="font-display text-2xl font-bold text-gray-900 dark:text-white">
+                      Weekly
+                    </p>
                     <p className="text-xs text-gray-500">Fresh picks</p>
                   </div>
                   <div>
-                    <p className="font-display text-2xl font-bold text-gray-900 dark:text-white">Value</p>
+                    <p className="font-display text-2xl font-bold text-gray-900 dark:text-white">
+                      Value
+                    </p>
                     <p className="text-xs text-gray-500">First approach</p>
                   </div>
                 </div>
@@ -122,10 +136,17 @@ export function About() {
       <section className="section container-custom">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5">
           {pillars.map(({ title, text }) => (
-            <div key={title} className="bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl p-6 shadow-card transition-transform duration-300 hover:-translate-y-1 hover:shadow-card-hover">
+            <div
+              key={title}
+              className="bg-white dark:bg-neutral-900 border border-gray-100 dark:border-neutral-800 rounded-2xl p-6 shadow-card transition-transform duration-300 hover:-translate-y-1 hover:shadow-card-hover"
+            >
               <FiCheckCircle className="text-primary-500 mb-4" size={24} />
-              <h2 className="font-display text-xl font-bold text-gray-900 dark:text-white mb-3">{title}</h2>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{text}</p>
+              <h2 className="font-display text-xl font-bold text-gray-900 dark:text-white mb-3">
+                {title}
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                {text}
+              </p>
             </div>
           ))}
         </div>
@@ -135,9 +156,14 @@ export function About() {
         <div className="max-w-6xl mx-auto bg-gradient-to-br from-primary-900 via-primary-700 to-rose-500 text-white rounded-3xl p-8 md:p-12 overflow-hidden relative">
           <div className="max-w-2xl relative z-10">
             <FiHeart className="text-primary-300 mb-4" size={28} />
-            <h2 className="font-display text-3xl font-bold mb-4">Our mission</h2>
+            <h2 className="font-display text-3xl font-bold mb-4">
+              Our mission
+            </h2>
             <p className="text-white/90 leading-relaxed text-lg">
-              StyleAura makes clothing and cosmetics content easier to trust, easier to use, and easier to fit into real budgets. It is a growing inspiration hub for people who want practical style without the overwhelm.
+              StyleAura makes clothing and cosmetics content easier to trust,
+              easier to use, and easier to fit into real budgets. It is a
+              growing inspiration hub for people who want practical style
+              without the overwhelm.
             </p>
           </div>
         </div>
