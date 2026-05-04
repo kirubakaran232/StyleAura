@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Blog = require('../models/Blog');
 const Click = require('../models/Click');
 const Product = require('../models/Product');
+const { uploadBuffer, uploadFiles } = require('../utils/cloudinary');
 
 function safeJsonParse(value, fallback) {
   if (typeof value !== 'string') return fallback;
@@ -101,11 +102,14 @@ const createBlog = asyncHandler(async (req, res) => {
   const images = req.files?.images || req.files?.['images[]'] || [];
 
   if (cover) {
-    data.coverImage = `/uploads/${cover.filename}`;
+    const uploadedCover = await uploadBuffer(cover, 'styleaura/blogs/covers');
+    data.coverImage = uploadedCover.url;
+    data.coverImagePublicId = uploadedCover.publicId;
   }
 
   if (images.length > 0) {
-    data.images = images.map(f => `/uploads/${f.filename}`);
+    const uploadedImages = await uploadFiles(images, 'styleaura/blogs/gallery');
+    data.images = uploadedImages.map(image => image.url);
     // If cover wasn't uploaded, use first image as cover for nicer cards.
     if (!data.coverImage) data.coverImage = data.images[0];
   }
@@ -148,7 +152,9 @@ const updateBlog = asyncHandler(async (req, res) => {
   const newImages = req.files?.images || req.files?.['images[]'] || [];
 
   if (cover) {
-    data.coverImage = `/uploads/${cover.filename}`;
+    const uploadedCover = await uploadBuffer(cover, 'styleaura/blogs/covers');
+    data.coverImage = uploadedCover.url;
+    data.coverImagePublicId = uploadedCover.publicId;
   }
 
   // Keep whatever images the client says to keep, then append newly uploaded ones.
@@ -157,7 +163,8 @@ const updateBlog = asyncHandler(async (req, res) => {
     data.images = existingImages.filter(Boolean);
   }
   if (newImages.length > 0) {
-    const uploaded = newImages.map(f => `/uploads/${f.filename}`);
+    const uploadedImages = await uploadFiles(newImages, 'styleaura/blogs/gallery');
+    const uploaded = uploadedImages.map(image => image.url);
     data.images = Array.isArray(data.images) ? [...data.images, ...uploaded] : uploaded;
   }
 

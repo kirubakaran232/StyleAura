@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const Product = require('../models/Product');
 const Click = require('../models/Click');
+const { uploadFiles } = require('../utils/cloudinary');
 
 // @desc    Get all products (paginated, filtered)
 // @route   GET /api/products
@@ -65,9 +66,10 @@ const createProduct = asyncHandler(async (req, res) => {
 
   // Handle uploaded images
   if (req.files && req.files.length > 0) {
-    data.images = req.files.map(file => ({
-      url: `/uploads/${file.filename}`,
-      publicId: file.filename,
+    const uploadedImages = await uploadFiles(req.files, 'styleaura/products');
+    data.images = uploadedImages.map(image => ({
+      url: image.url,
+      publicId: image.publicId,
     }));
   }
 
@@ -100,9 +102,10 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 
   if (req.files && req.files.length > 0) {
-    data.images = req.files.map(file => ({
-      url: `/uploads/${file.filename}`,
-      publicId: file.filename,
+    const uploadedImages = await uploadFiles(req.files, 'styleaura/products');
+    data.images = uploadedImages.map(image => ({
+      url: image.url,
+      publicId: image.publicId,
     }));
   }
 
