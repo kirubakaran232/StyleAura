@@ -41,6 +41,39 @@ const login = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Register public user
+// @route   POST /api/auth/signup
+const signup = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    res.status(400);
+    throw new Error('Please provide email and password');
+  }
+
+  const existing = await User.findOne({ email });
+  if (existing) {
+    res.status(400);
+    throw new Error('User already exists');
+  }
+
+  const user = await User.create({ email, password, role: 'user' });
+  const token = generateToken(user._id);
+
+  res.cookie('token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  });
+
+  res.status(201).json({
+    success: true,
+    user: { id: user._id, email: user.email, role: user.role },
+    token,
+  });
+});
+
 // @desc    Get current user
 // @route   GET /api/auth/me
 const getMe = asyncHandler(async (req, res) => {
@@ -91,4 +124,4 @@ const register = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { login, getMe, logout, register };
+module.exports = { login, signup, getMe, logout, register };

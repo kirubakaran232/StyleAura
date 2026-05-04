@@ -10,6 +10,7 @@ import ShopPage from './pages/ShopPage';
 import OutfitsPage from './pages/OutfitsPage';
 import SearchResults from './pages/SearchResults';
 import Bookmarks from './pages/Bookmarks';
+import Login from './pages/Login';
 import {
   About,
   Contact,
@@ -54,6 +55,7 @@ function App() {
                   <Route path="/shop" element={<ShopPage />} />
                   <Route path="/outfits" element={<OutfitsPage />} />
                   <Route path="/search" element={<SearchResults />} />
+                  <Route path="/login" element={<Login />} />
                   <Route path="/bookmarks" element={<Bookmarks />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/contact" element={<Contact />} />

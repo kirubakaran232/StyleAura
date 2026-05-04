@@ -6,7 +6,7 @@ const api = axios.create({
 });
 
 // Attach token from localStorage if present
-const token = localStorage.getItem('adminToken');
+const token = localStorage.getItem('authToken') || localStorage.getItem('adminToken');
 if (token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 // ── Blogs ───────────────────────────────────────────────────
@@ -18,6 +18,11 @@ export const deleteBlog = (id) => api.delete(`/blogs/${id}`);
 export const likeBlog = (id) => api.post(`/blogs/${id}/like`);
 export const addComment = (id, data) => api.post(`/blogs/${id}/comments`, data);
 export const getAdminBlogs = () => api.get('/blogs/admin/all');
+
+export const getBookmarks = () => api.get('/users/bookmarks');
+export const addBookmark = (item) => api.post('/users/bookmarks', item);
+export const removeBookmark = (itemId) => api.delete(`/users/bookmarks/${itemId}`);
+export const getLikedBlogs = () => api.get('/users/likes');
 
 // ── Products ────────────────────────────────────────────────
 export const getProducts = (params) => api.get('/products', { params });

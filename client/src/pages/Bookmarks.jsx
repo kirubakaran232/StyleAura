@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useBookmarks } from '../context/BookmarkContext';
 import { FiTrash2 } from 'react-icons/fi';
+import { useAuth } from '../context/AuthContext';
 
 export default function Bookmarks() {
   const { bookmarks, toggleBookmark } = useBookmarks();
+  const { user } = useAuth();
 
   return (
     <>
@@ -21,7 +23,13 @@ export default function Bookmarks() {
       </section>
 
       <section className="section container-custom min-h-[50vh]">
-        {bookmarks.length === 0 ? (
+        {!user ? (
+          <div className="text-center py-20 text-gray-400">
+            <p className="text-xl font-semibold">Sign in to view saved items</p>
+            <p className="text-sm mt-2 mb-6">Your saves are stored in your StyleAura account.</p>
+            <Link to="/login" className="btn-primary">Login</Link>
+          </div>
+        ) : bookmarks.length === 0 ? (
           <div className="text-center py-20 text-gray-400">
             <p className="text-xl font-semibold">No saved items yet</p>
             <p className="text-sm mt-2 mb-6">Start exploring and save items for later.</p>

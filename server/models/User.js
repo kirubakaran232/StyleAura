@@ -17,9 +17,41 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['admin'],
-    default: 'admin',
+    enum: ['admin', 'user'],
+    default: 'user',
   },
+  bookmarks: [
+    {
+      itemId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        refPath: 'bookmarks.itemType',
+      },
+      itemType: {
+        type: String,
+        required: true,
+        enum: ['Blog', 'Product'],
+      },
+      title: String,
+      slug: String,
+      coverImage: String,
+      type: {
+        type: String,
+        enum: ['blog', 'product'],
+        required: true,
+      },
+      savedAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  likedBlogs: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Blog',
+    },
+  ],
 }, { timestamps: true });
 
 // Hash password before save

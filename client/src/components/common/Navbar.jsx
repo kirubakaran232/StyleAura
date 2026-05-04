@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiSearch, FiBookmark, FiMenu, FiX, FiLock } from 'react-icons/fi';
+import { FiSearch, FiBookmark, FiMenu, FiX, FiLogOut, FiUser } from 'react-icons/fi';
 import { SiPinterest, SiInstagram } from 'react-icons/si';
 import ThemeToggle from './ThemeToggle';
 import SearchBar from './SearchBar';
+import { useAuth } from '../../context/AuthContext';
 
 const NAV_LINKS = [
   { label: "Home", to: "/" },
@@ -19,6 +20,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -86,9 +88,19 @@ export default function Navbar() {
               >
                 <SiInstagram size={17} />
               </a>
-              {/* <Link to="/admin/login" className="btn-outline text-sm py-2 px-3 hidden xl:flex">
-                <FiLock size={15} /> Admin
-              </Link> */}
+              {user ? (
+                <button
+                  onClick={logout}
+                  className="btn-outline text-sm py-2 px-3 hidden sm:flex"
+                  title={user.email}
+                >
+                  <FiLogOut size={15} /> Logout
+                </button>
+              ) : (
+                <Link to="/login" className="btn-outline text-sm py-2 px-3 hidden sm:flex">
+                  <FiUser size={15} /> Login
+                </Link>
+              )}
               {/* <ThemeToggle /> */}
               <button
                 className="lg:hidden btn-ghost p-2.5 rounded-xl"
@@ -134,7 +146,14 @@ export default function Navbar() {
                 </Link>
               ))}
               <Link to="/bookmarks" className="sidebar-link text-base">Saved</Link>
-              <Link to="/admin/login" className="sidebar-link text-base">Admin Login</Link>
+              {user ? (
+                <button type="button" onClick={logout} className="sidebar-link text-base text-left">
+                  Logout
+                </button>
+              ) : (
+                <Link to="/login" className="sidebar-link text-base">Login</Link>
+              )}
+              {user?.role === 'admin' && <Link to="/admin" className="sidebar-link text-base">Admin Dashboard</Link>}
             </nav>
           </motion.div>
         )}

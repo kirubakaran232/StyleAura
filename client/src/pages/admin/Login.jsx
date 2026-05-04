@@ -10,7 +10,7 @@ export default function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,7 +19,12 @@ export default function AdminLogin() {
     
     setLoading(true);
     try {
-      await login(email, password);
+      const data = await login(email, password);
+      if (data.user.role !== 'admin') {
+        await logout();
+        toast.error('Admin access only');
+        return;
+      }
       toast.success('Welcome back!');
       navigate('/admin');
     } catch (err) {

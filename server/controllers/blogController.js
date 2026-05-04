@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Blog = require('../models/Blog');
 const Click = require('../models/Click');
 const Product = require('../models/Product');
+const User = require('../models/User');
 const { uploadBuffer, uploadFiles } = require('../utils/cloudinary');
 
 function safeJsonParse(value, fallback) {
@@ -195,9 +196,12 @@ const deleteBlog = asyncHandler(async (req, res) => {
 // @desc    Like a blog
 // @route   POST /api/blogs/:id/like
 const likeBlog = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id).select('likedBlogs');
+  const alreadyLiked = user.likedBlogs.some(id => id.toString() === req.params.id);
+
   const blog = await Blog.findByIdAndUpdate(
     req.params.id,
-    { $inc: { likes: 1 } },
+    { $inc: { likes: alreadyLiked ? -1 : 1 } },
     { new: true }
   );
 
@@ -206,7 +210,19 @@ const likeBlog = asyncHandler(async (req, res) => {
     throw new Error('Blog not found');
   }
 
-  res.json({ success: true, likes: blog.likes });
+  if (alreadyLiked) {
+    user.likedBlogs = user.likedBlogs.filter(id => id.toString() !== req.params.id);
+  } else {
+    user.likedBlogs.push(blog._id);
+  }
+  await user.save();
+
+  if (blog.likes < 0) {
+    blog.likes = 0;
+    await blog.save();
+  }
+
+  res.json({ success: true, likes: blog.likes, liked: !alreadyLiked });
 });
 
 // @desc    Add comment

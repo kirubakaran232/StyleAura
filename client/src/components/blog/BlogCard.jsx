@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { FiHeart, FiBookmark, FiEye } from 'react-icons/fi';
 import { SiPinterest } from 'react-icons/si';
 import { useBookmarks } from '../../context/BookmarkContext';
-import { likeBlog } from '../../services/api';
 
 function getImageUrl(img) {
   if (!img) return '/placeholder.jpg';
@@ -14,22 +13,18 @@ function getImageUrl(img) {
 }
 
 export default function BlogCard({ blog, index = 0, innerRef }) {
-  const { toggleBookmark, isBookmarked } = useBookmarks();
+  const { toggleBookmark, isBookmarked, toggleLike, isLiked } = useBookmarks();
   const [likes, setLikes] = useState(blog.likes || 0);
-  const [liked, setLiked] = useState(false);
   const [pinHover, setPinHover] = useState(false);
 
   const imageUrl = getImageUrl(blog.coverImage);
+  const liked = isLiked(blog._id);
 
   const handleLike = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (liked) return;
-    try {
-      const { data } = await likeBlog(blog._id);
-      setLikes(data.likes);
-      setLiked(true);
-    } catch {}
+    const data = await toggleLike(blog._id);
+    if (data) setLikes(data.likes);
   };
 
   const handleBookmark = (e) => {

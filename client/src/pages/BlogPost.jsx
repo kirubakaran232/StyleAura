@@ -5,10 +5,11 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { FiHeart, FiEye, FiClock, FiTwitter, FiFacebook, FiLink } from "react-icons/fi";
 import { SiPinterest } from "react-icons/si";
-import { getBlog, likeBlog } from "../services/api";
+import { getBlog } from "../services/api";
 import ProductCard from "../components/product/ProductCard";
 import ImageGallery from "../components/product/ImageGallery";
 import toast from "react-hot-toast";
+import { useBookmarks } from "../context/BookmarkContext";
 
 function getImageUrl(img) {
   if (!img)
@@ -20,8 +21,8 @@ function getImageUrl(img) {
 
 export default function BlogPost() {
   const { slug } = useParams();
-  const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
+  const { toggleLike, isLiked } = useBookmarks();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["blog", slug],
@@ -69,15 +70,14 @@ export default function BlogPost() {
     ...(data.images || []).map((u) => ({ url: u })),
   ];
   const hasFeaturedProducts = (data.featuredProducts || []).length > 0;
+  const liked = isLiked(data._id);
 
   const handleLike = async () => {
-    if (liked) return;
-    try {
-      const res = await likeBlog(data._id);
-      setLikes(res.data.likes);
-      setLiked(true);
-      toast.success("Thanks for liking!");
-    } catch {}
+    const result = await toggleLike(data._id);
+    if (result) {
+      setLikes(result.likes);
+      toast.success(result.liked ? "Thanks for liking!" : "Like removed");
+    }
   };
 
   const copyLink = () => {

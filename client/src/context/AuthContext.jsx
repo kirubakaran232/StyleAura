@@ -8,12 +8,13 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('authToken') || localStorage.getItem('adminToken');
     if (token) {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       api.get('/auth/me')
         .then(({ data }) => setUser(data.user))
         .catch(() => {
+          localStorage.removeItem('authToken');
           localStorage.removeItem('adminToken');
           delete api.defaults.headers.common['Authorization'];
         })
@@ -26,7 +27,17 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     const { data } = await api.post('/auth/login', { email, password });
     setUser(data.user);
-    localStorage.setItem('adminToken', data.token);
+    localStorage.setItem('authToken', data.token);
+    localStorage.removeItem('adminToken');
+    api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+    return data;
+  };
+
+  const signup = async (email, password) => {
+    const { data } = await api.post('/auth/signup', { email, password });
+    setUser(data.user);
+    localStorage.setItem('authToken', data.token);
+    localStorage.removeItem('adminToken');
     api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
     return data;
   };
@@ -34,12 +45,13 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     await api.post('/auth/logout').catch(() => {});
     setUser(null);
+    localStorage.removeItem('authToken');
     localStorage.removeItem('adminToken');
     delete api.defaults.headers.common['Authorization'];
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout, isAdmin: !!user }}>
+    <AuthContext.Provider value={{ user, loading, login, signup, logout, isAdmin: user?.role === 'admin' }}>
       {children}
     </AuthContext.Provider>
   );
