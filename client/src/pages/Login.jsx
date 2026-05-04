@@ -115,9 +115,9 @@ export default function Login() {
             </form>
           </div>
 
-          <p className="text-center text-sm text-gray-500 mt-6">
+          {/* <p className="text-center text-sm text-gray-500 mt-6">
             Admin? <Link to="/admin/login" className="text-primary-600 font-semibold hover:underline">Use the admin portal</Link>
-          </p>
+          </p> */}
         </motion.div>
       </div>
     </>
