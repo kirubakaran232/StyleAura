@@ -14,6 +14,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
   "https://styleaura-1.onrender.com",
+  "https://styleaura-app.onrender.com",
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
